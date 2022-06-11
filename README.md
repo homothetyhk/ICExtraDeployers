@@ -1,0 +1,1 @@
+This is a mod which allows ItemChanger saves to have custom-placed Baldurs, Vengeflies, Shadow Gates, Quake Floors, Toll Gates, Switch Gates, and more. It has no effects on its own, other than increasing the game's startup time due to preloading required objects; therefore, users are advised to have it installed only if it is a required dependency.
