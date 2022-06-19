@@ -1,6 +1,6 @@
 ﻿namespace ICExtraDeployers.Deployers
 {
-    public record TollGate : Deployer
+    public record TollGateDeployer : Deployer
     {
         public float GateX { get; init; }
         public float GateY { get; init; }

@@ -7,6 +7,7 @@ namespace ICExtraDeployers
         public override void Initialize(Dictionary<string, Dictionary<string, GameObject>> preloadedObjects)
         {
             ICEDPreloader.Instance.SavePreloads(preloadedObjects);
+            DebugMenu.DebugInterop.Setup();
         }
 
         public override List<(string, string)> GetPreloadNames()

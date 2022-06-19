@@ -30,6 +30,8 @@
             UObject.DontDestroyOnLoad(_switchGate);
             _vengefly = objectsByScene[SceneNames.Fungus1_28]["Buzzer (3)"];
             UObject.DontDestroyOnLoad(_vengefly);
+            _baldur = objectsByScene[SceneNames.Fungus1_28]["Battle Music/Blocker 1"];
+            UObject.DontDestroyOnLoad(_baldur);
             _shadowGate = objectsByScene[SceneNames.Fungus3_44]["shadow_gate"];
             UObject.DontDestroyOnLoad(_shadowGate);
             _quakeFloor = objectsByScene[SceneNames.Crossroads_52]["Quake Floor"];

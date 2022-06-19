@@ -1,6 +1,6 @@
 ﻿namespace ICExtraDeployers.Deployers
 {
-    public record Vengefly : EnemyDeployer
+    public record VengeflyDeployer : EnemyDeployer
     {
         public override GameObject Instantiate()
         {

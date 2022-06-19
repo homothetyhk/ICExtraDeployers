@@ -1,1 +1,7 @@
 This is a mod which allows ItemChanger saves to have custom-placed Baldurs, Vengeflies, Shadow Gates, Quake Floors, Toll Gates, Switch Gates, and more. It has no effects on its own, other than increasing the game's startup time due to preloading required objects; therefore, users are advised to have it installed only if it is a required dependency.
+
+ICED now has an interaction with DebugMod. If both are installed, ICED will create add a very limited info panel and function panel to allow the user to test deployers. To use,
+- Stand where you want the object, and press "Set Pos 1". Some deployers require a second position for a second object, in which case you should stand in another position and press "Set Pos 2". For example, Switch Gates and Toll Gates put the interactive object at Pos 1 and the gate at Pos 2.
+- Press the button for the object you want to deploy, and it should appear.
+- ICED will keep track of the deployers you create this way in the unsaved deployers list. Bindable functions allow either adding the deployers to the current IC save file, serializing the deployers to a file which will appear in Mods/ItemChanger, or clearing the unsaved deployers.
+The info panel displays the current Pos 1, Pos 2, and unsaved deployer count.
