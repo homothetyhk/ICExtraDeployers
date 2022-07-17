@@ -90,7 +90,7 @@ namespace ICExtraDeployers.DebugMenu
             }), "Floor Spike", CATEGORY);
             AddActionToKeyBindList(() => DeployNow(new TollGateDeployer
             {
-                Cost = 50,
+                Cost = Cost.NewGeoCost(50),
             }), "Toll Gate", CATEGORY);
             AddActionToKeyBindList(() => DeployNow(new SwitchGateDeployer
             {

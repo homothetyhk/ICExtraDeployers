@@ -1,10 +1,13 @@
-﻿namespace ICExtraDeployers.Deployers
+﻿using HutongGames.PlayMaker.Actions;
+using ItemChanger.Util;
+
+namespace ICExtraDeployers.Deployers
 {
     public record TollGateDeployer : Deployer
     {
         public float GateX { get; init; }
         public float GateY { get; init; }
-        public int Cost { get; init; }
+        public Cost Cost { get; init; }
 
         public override GameObject Instantiate()
         {
@@ -29,11 +32,34 @@
             return gate;
         }
 
-        public static void SetTollCost(GameObject tollMachine, int cost)
+        public static void SetTollCost(GameObject tollMachine, Cost cost)
         {
-            FsmState getPrice = tollMachine.LocateMyFSM("Toll Machine").GetState("Get Price");
+            PlayMakerFSM fsm = tollMachine.LocateMyFSM("Toll Machine");
+            FsmState getPrice = fsm.GetState("Get Price");
             getPrice.ClearActions();
-            tollMachine.LocateMyFSM("Toll Machine").FsmVariables.GetFsmInt("Toll Cost").Value = cost;
+            FsmState sendText = fsm.GetState("Send Text");
+            sendText.Actions = new FsmStateAction[]
+            {
+                new Lambda(OpenYNDialogue)
+            };
+            
+            void OpenYNDialogue()
+            {
+                if (cost is GeoCost gc)
+                {
+                    string text = Language.Language.Get("TOLLBOOTH_GATE", "Prompts");
+                    YNUtil.OpenYNDialogue(tollMachine, text, gc.amount);
+                }
+                else if (cost is not null)
+                {
+                    string text = cost.GetCostText();
+                    YNUtil.OpenYNDialogue(tollMachine, text, cost.CanPay());
+                }
+                else
+                {
+                    fsm.SendEvent("YES");
+                }
+            }
         }
 
         public static void ResetFSMs(GameObject tollMachine)
@@ -53,7 +79,7 @@
             check.ClearActions();
             check.AddFirstAction(new Lambda(() =>
             {
-                if (!PlayerData.instance.hasLantern && HeroController.instance.vignetteFSM.FsmVariables.GetFsmInt("Darkness Level").Value == 2)
+                if (!PlayerData.instance.GetBool(nameof(PlayerData.hasLantern)) && HeroController.instance.vignetteFSM.FsmVariables.GetFsmInt("Darkness Level").Value == 2)
                 {
                     check.Fsm.Event("DISABLE");
                 }
